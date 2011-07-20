@@ -1,0 +1,9 @@
+<tr class=" record <%= cycle('on', 'on-hover') %>" id="<%= dom_id(fee) -%>">
+  <td >
+    <%= fee.from_account %><%= ", #{fee.message.truncate(55)} " unless fee.message.nil? %>
+  </td>
+  <td><%= fee.month %> / <%= fee.year %></td>
+  <td>
+    <%= fee.amount %>&nbsp;<%= fee.currency %>
+  </td>
+</tr>

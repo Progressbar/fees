@@ -1,0 +1,25 @@
+en:
+  shared:
+    admin:
+      image_picker:
+        image: image
+  plugins:
+    fees:
+      title: Fees
+  admin:
+    fees:
+      actions:
+        create_new: Add New Fee
+        reorder: Reorder Fees
+        reorder_done: Done Reordering Fees
+      records:
+        title: Fees
+        sorry_no_results: Sorry! There are no results found.
+        no_items_yet: There are no Fees yet.
+      fee:
+        view_live_html: View this fee live <br/><em>(opens in a new window)</em>
+        edit: Edit this fee
+        delete: Remove this fee forever
+  fees:
+    show:
+      other: Other Fees

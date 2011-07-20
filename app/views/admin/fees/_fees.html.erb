@@ -1,0 +1,20 @@
+<%= will_paginate @fees %>
+<table class="fees">
+  <thead>
+    <tr>
+      <th>From Account</th>
+      <th style="width: 2%;">Month&nbsp;/&nbsp;Year</th>
+      <th style="width: 2%;">Amount</th>
+    </tr>
+  </thead>
+  <tbody>    
+  <%= render :partial => 'fee', :collection => @fees %>
+  </tbody>
+</table>
+<style>
+
+  .fees th, .fees td {
+    padding: 3px 5px;
+  }
+  
+</style>

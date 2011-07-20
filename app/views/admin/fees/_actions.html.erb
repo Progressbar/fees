@@ -1,0 +1,10 @@
+<ul>
+  <% if Admin::FeesController.searchable? %>
+    <li>
+      <%= render :partial => "/shared/admin/search",
+                  :locals => {
+                    :url => admin_fees_path
+                  } %>
+    </li>
+  <% end %>
+</ul>
