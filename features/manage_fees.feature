@@ -1,11 +1,12 @@
 @fees
 Feature: Fees
-  In order to have fees on my website
-  As an administrator
-  I want to manage fees
+  In order to have membership fees
+  As an member
+  I want to see my fees
 
   Background:
     Given I am a logged in refinery user
+    And I have role member
     And I have no fees
 
   @fees-list @list
@@ -32,17 +33,6 @@ Feature: Fees
     Then I should see "From can't be blank"
     And I should have 0 fees
 
-  @fees-edit @edit
-  Scenario: Edit Existing Fee
-    Given I have fees titled "A from"
-    When I go to the list of fees
-    And I follow "Edit this fee" within ".actions"
-    Then I fill in "From" with "A different from"
-    And I press "Save"
-    Then I should see "'A different from' was successfully updated."
-    And I should be on the list of fees
-    And I should not see "A from"
-
   @fees-duplicate @duplicate
   Scenario: Create Duplicate Fee
     Given I only have fees titled UniqueTitleOne, UniqueTitleTwo
@@ -52,12 +42,3 @@ Feature: Fees
     And I press "Save"
     Then I should see "There were problems"
     And I should have 2 fees
-
-  @fees-delete @delete
-  Scenario: Delete Fee
-    Given I only have fees titled UniqueTitleOne
-    When I go to the list of fees
-    And I follow "Remove this fee forever"
-    Then I should see "'UniqueTitleOne' was successfully removed."
-    And I should have 0 fees
- 

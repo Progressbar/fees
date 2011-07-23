@@ -1,5 +1,5 @@
 class CreateFees < ActiveRecord::Migration
-  def self.up   
+  def self.up    
     create_table :fees do |t|
       t.string :from_account, :null => false
       t.integer :vs, :null => false
@@ -7,14 +7,16 @@ class CreateFees < ActiveRecord::Migration
       t.string :currency, :null => false, :default => 'eur'
       t.integer :month, :null => false
       t.integer :year, :null => false
+      t.string :stamp, :null => false
       t.text :message
       
-      t.references :user, :null => false
+      t.references :user
       
       t.timestamps
     end
   
     add_index :fees, :id
+    add_index :fees, :stamp
   end
 
   def self.down

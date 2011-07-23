@@ -3,6 +3,18 @@ class Fee < ActiveRecord::Base
 
   belongs_to :user
   
+  validates :from_account, :presence => true
+  validates :vs, :presence => true, :numericality => { :only_integer => true }
+  validates :amount, :presence => true
+  validates :month, :presence => true, :numericality => { :only_integer => true }
+  validates :year, :presence => true, :numericality => { :only_integer => true }
+  validates :user, :presence => true
+  validates :stamp, :presence => true, :uniqueness => true
+  
+  validates_associated :user
+ 
+  private
+  
   def self.search(search, page, user)
     paginate :per_page => 20, :page => page,
 #             :conditions => ['(from_account like ? OR message like ?)', "%#{search}%", "%#{search}%"],
@@ -15,6 +27,4 @@ class Fee < ActiveRecord::Base
              :conditions => ['user_id = ?', user.id],
              :order => 'year DESC, month DESC'
   end
-
-
 end
