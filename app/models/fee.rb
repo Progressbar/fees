@@ -17,7 +17,6 @@ class Fee < ActiveRecord::Base
   
   def self.search(search, page, user)
     paginate :per_page => 20, :page => page,
-#             :conditions => ['(from_account like ? OR message like ?)', "%#{search}%", "%#{search}%"],
              :conditions => ['user_id = ? AND (from_account like ? OR message like ?)', user.id, "%#{search}%", "%#{search}%"],
              :order => 'year DESC, month DESC'
   end

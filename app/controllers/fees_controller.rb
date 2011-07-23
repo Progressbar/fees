@@ -1,11 +1,8 @@
 class FeesController < ApplicationController
 
-#  before_filter :find_page
-
   def index
     render :text => 0
-  end
-  
+  end  
   
   def create
     response = {'status' => false}
@@ -22,8 +19,5 @@ class FeesController < ApplicationController
 
     render :text => response.to_json
   end
-
-protected
-
-
+  
 end
