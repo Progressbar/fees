@@ -2,9 +2,20 @@
   <% if Admin::FeesController.searchable? %>
     <li>
       <%= render :partial => "/shared/admin/search",
-                  :locals => {
-                    :url => admin_fees_path
-                  } %>
+        :locals => {
+        :url => admin_fees_path
+      } %>
     </li>
+  <% end %>
+  <% if current_user.has_role?(:superuser) %>
+  <li <%= "class='selected'" if params[:action] == "index" %>>
+    <%= link_to t('.my_fees'), admin_fees_url %>
+  </li>
+  <li <%= "class='selected'" if params[:action] == "paired" %>>
+    <%= link_to t('.paired_payments'), paired_admin_fees_url %>
+  </li>
+  <li <%= "class='selected'" if params[:action] == "unpaired" %>>
+    <%= link_to t('.unpaired_payments'), unpaired_admin_fees_url %>
+  </li>
   <% end %>
 </ul>

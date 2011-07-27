@@ -2,9 +2,10 @@
   get '/fees/create', :to => 'fees#create'
 
   scope(:path => 'refinery', :as => 'admin', :module => 'admin') do
-    resources :fees, :except => :show do
+    resources :fees do
       collection do
-        post :update_positions
+        get :paired
+        get :unpaired
       end
     end
   end

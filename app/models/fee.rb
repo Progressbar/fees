@@ -8,13 +8,13 @@ class Fee < ActiveRecord::Base
   validates :amount, :presence => true
   validates :month, :presence => true, :numericality => { :only_integer => true }
   validates :year, :presence => true, :numericality => { :only_integer => true }
-  validates :user, :presence => true
   validates :stamp, :presence => true, :uniqueness => true
   
   validates_associated :user
- 
-  private
-  
+
+  scope :unpaired, :conditions => {:user_id => nil}
+  scope :paired, :conditions => 'user_id IS NOT NULL'
+      
   def self.search(search, page, user)
     paginate :per_page => 20, :page => page,
              :conditions => ['user_id = ? AND (from_account like ? OR message like ?)', user.id, "%#{search}%", "%#{search}%"],
@@ -25,5 +25,9 @@ class Fee < ActiveRecord::Base
     paginate :per_page => 20, :page => page,
              :conditions => ['user_id = ?', user.id],
              :order => 'year DESC, month DESC'
+  end
+  
+  def self.latest(number = 7)
+    limit(number)
   end
 end
