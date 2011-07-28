@@ -16,22 +16,28 @@ module Admin
     end
 
     def pair
-      if params[:fee]
-        pfs = params[:fee]
-        pfs.each do |id, vs|
-          if params[:fee][id][:vs]
-            fee = Fee.find(id)
-            user = User.find_by_progressbar_uid(params[:fee][id][:vs])
-            unless user.nil?
-              fee.update_attribute(:vs, user.progressbar_uid)
-              fee.update_attribute(:user_id, user.id)
+      unless current_user.has_role?(:superuser)
+        flash[:error] = 'Bad, bad boy!'
+        redirect_to :action => 'index'
+      else
+        if params[:fee]
+          pfs = params[:fee]
+          pfs.each do |id, vs|
+            if params[:fee][id][:vs]
+              fee = Fee.find(id)
+              user = User.find_by_progressbar_uid(params[:fee][id][:vs])
+              unless user.nil?
+                fee.update_attribute(:vs, user.progressbar_uid)
+                fee.update_attribute(:user_id, user.id)
+              end
             end
           end
+
+          flash[:notice] = 'Fees was updated. Thank You!'
         end
-      end
-      
-      flash[:notice] = 'Fees was updated. Thank You!'
-      redirect_to :action => 'unpaired'
+        
+        redirect_to :action => 'unpaired'
+      end      
     end
 
     def paired

@@ -14,12 +14,13 @@
       </div>
     </form>
   <% end %>
-
+  <% if params[:action] == 'unpaired' %>
   <div id="users-list">
     <% User.where('progressbar_uid IS NOT NULL').each do |u| %>
       <%= u.identifications %><br />
     <% end %>
   </div>
+  <% end %>
 <% else %>
   <p>
     <% unless searching? %>
