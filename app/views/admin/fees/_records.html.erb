@@ -2,8 +2,23 @@
   <h2><%= t('results_for', :scope => 'shared.admin.search', :query => params[:search]) %></h2>
 <% end %>
 <% if @fees.any? %>
-  <div class='pagination_container'>
-    <%= render :partial => 'fees' %>
+  <% if params[:action] == 'unpaired' %>
+    <form action="<%= pair_admin_fees_url %>" action="GET" >    
+    <% end %>
+    <div class='pagination_container'>
+      <%= render :partial => 'fees' %>
+    </div>
+    <% if params[:action] == 'unpaired' %>
+      <div style="float: right;">
+        <%= submit_tag 'pair' %>
+      </div>
+    </form>
+  <% end %>
+
+  <div id="users-list">
+    <% User.where('progressbar_uid IS NOT NULL').each do |u| %>
+      <%= u.identifications %><br />
+    <% end %>
   </div>
 <% else %>
   <p>
@@ -16,3 +31,17 @@
     <% end %>
   </p>
 <% end %>
+  
+<style type="text/css">
+
+  .fees th, .fees td {
+    padding: 3px 5px;
+  }
+  
+  #users-list {
+    clear: both;
+    max-height: 30em;
+    overflow: auto;
+  }
+  
+</style>

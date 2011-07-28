@@ -1,7 +1,13 @@
 <tr class=" record <%= cycle('on', 'on-hover') %>" id="<%= dom_id(fee) -%>">
-  <td >
+  <td>   
+    <%#= link_to fee.from_account, admin_fee_url(fee) %>
     <%= fee.from_account %><%= ", #{fee.message.truncate(55)} " unless fee.message.nil? %>
   </td>
+  <% if params[:action] == 'unpaired' %>
+  <td>
+    <%= text_field "fee[#{fee.id}]", :vs, :size => 6, :maxlength => 7 %>
+  </td>
+  <% end %>
   <td><%= fee.month %> / <%= fee.year %></td>
   <td>
     <%= fee.amount %>&nbsp;<%= fee.currency %>

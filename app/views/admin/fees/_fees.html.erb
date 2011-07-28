@@ -2,7 +2,10 @@
 <table class="fees">
   <thead>
     <tr>
-      <th>From Account</th>
+      <th style="width: 90%;">From Account</th>
+      <% if params[:action] == 'unpaired' %>
+      <th style="width: 2%;">VS</th>      
+      <% end %>
       <th style="width: 2%;">Month&nbsp;/&nbsp;Year</th>
       <th style="width: 2%;">Amount</th>
     </tr>
@@ -11,10 +14,3 @@
   <%= render :partial => 'fee', :collection => @fees %>
   </tbody>
 </table>
-<style>
-
-  .fees th, .fees td {
-    padding: 3px 5px;
-  }
-  
-</style>
