@@ -1,7 +1,8 @@
 <tr class=" record <%= cycle('on', 'on-hover') %>" id="<%= dom_id(fee) -%>">
   <td>   
     <%#= link_to fee.from_account, admin_fee_url(fee) %>
-    <%= fee.from_account %><%= ", #{fee.message.truncate(55)} " unless fee.message.nil? %>
+    <%= fee.from_account %><%= ", #{fee.message.truncate(50)} " unless fee.message.nil? %>
+    <%=  " - #{fee.user.username}" unless fee.user.nil? %>
   </td>
   <% if params[:action] == 'unpaired' %>
   <td>
